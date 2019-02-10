@@ -106,7 +106,6 @@ test_stationarity(train_1['sales'])
 Dtrain_1 = train_1.sales - train_1.sales.shift(1)  # Shift data
 Dtrain_1 = Dtrain_1.dropna(inplace=False)  # Drop NaN values
 
-
 test_stationarity(Dtrain_1, window=12)  #Test the stationarity again
 
 # Now the data plots look like a stationary timeseries. Also the p-value of D-F-test is extremely small thus
