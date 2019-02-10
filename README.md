@@ -1,17 +1,17 @@
 # Store-Demand-Forecasting
-The objective is to predict 3 months of item-level sales data at different store locations.
+The objective is to predict 3 months of item-level sales data at different store locations.  
 
-Data is from Kaggle "Store Item Demand Forecasting" -competition. https://www.kaggle.com/c/demand-forecasting-kernels-only/data
+Data is from Kaggle "Store Item Demand Forecasting" -competition. https://www.kaggle.com/c/demand-forecasting-kernels-only/data  
 
-File descriptions
+# File descriptions
 
-train.csv - Training data
-test.csv - Test data (Note: the Public/Private split is time based)
+train.csv - Training data  
+test.csv - Test data (Note: the Public/Private split is time based)  
 
 
-Data fields
+# Data fields
 
-date - Date of the sale data. There are no holiday effects or store closures.
-store - Store ID
-item - Item ID
-sales - Number of items sold at a particular store on a particular date.
+date - Date of the sale data. There are no holiday effects or store closures.  
+store - Store ID  
+item - Item ID  
+sales - Number of items sold at a particular store on a particular date.  
