@@ -193,7 +193,19 @@ train1['weekday'] = train1['date'].dt.weekday
 
 # Read the holiday file
 
-# holidays = pd.read_csv('USHolidays.csv')
+holidays = pd.read_csv('usholidays.csv', header=None, names=['date', 'holiday'])
+
+# Format datetime again
+
+holidays['date'] = pd.to_datetime(holidays['date'], format='%Y/%m/%d')
+
+print(holidays.head(3))
+
+# Merge holidays into the data:
+
+
+
+
 
 
 
