@@ -136,14 +136,14 @@ fig2 = sm.graphics.tsa.plot_pacf(Dtrain_1, lags=40, ax=ax2)
 # We'll consider the MA part to be nonexistent.
 
 model = sm.tsa.statespace.SARIMAX(train_1.sales, trend='n', order=(6, 1, 0)).fit()
-print(model.summary())
+# print(model.summary())
 
 # The summary for the model looks good. Now we'll look at the residuals of the model. They should be white noise.
 from scipy import stats
 from scipy.stats import normaltest
 
 residuals = model.resid
-print(normaltest(residuals))
+# print(normaltest(residuals))
 # Normaltest has a very low p-value so the residuals are not normally distributed.
 
 # Lets plot the residuals
@@ -167,9 +167,34 @@ start = 1730
 end = 1826
 train_1['forecast'] = model.predict(start = start, end= end, dynamic=True)
 train_1[start:end][['sales', 'forecast']].plot(figsize=(12, 8))
-plt.show()
+# plt.show()
 
-# The prediction is not optimal. We could use fbprophet on the train-file to see if that would work better.
+# Lets make a function to show the error of the prediction:
+
+def errors(y_true, y_pred):
+    mape = np.mean(abs((y_true-y_pred)/y_true))*100
+    smape = np.mean((np.abs(y_pred - y_true) * 200/ (np.abs(y_pred) + np.abs(y_true))).fillna(0))
+    print('MAPE: %.2f %% \nSMAPE: %.2f' % (mape, smape), "%")
+
+errors(train_1[1730:1825]['sales'], train_1[1730:1825]['forecast'])
+
+# The prediction is not optimal. Lets add exogenous variables (Holidays of USA).
+
+# Format original data again to start fresh:
+
+train1 = train[train['store'] == 1]
+train1 = train1[train1['item'] == 1]
+
+train1['year'] = train1['date'].dt.year - 2012
+train1['month'] = train1['date'].dt.month
+train1['day'] = train1['date'].dt.dayofyear
+train1['weekday'] = train1['date'].dt.weekday
+# print(train1.head)
+
+# Read the holiday file
+
+# holidays = pd.read_csv('USHolidays.csv')
+
 
 
 
