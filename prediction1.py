@@ -180,30 +180,9 @@ errors(train_1[1730:1825]['sales'], train_1[1730:1825]['forecast'])
 
 # The prediction is not optimal. Lets add exogenous variables (Holidays of USA).
 
-# Format original data again to start fresh:
-
-train1 = train[train['store'] == 1]
-train1 = train1[train1['item'] == 1]
-
-train1['year'] = train1['date'].dt.year - 2012
-train1['month'] = train1['date'].dt.month
-train1['day'] = train1['date'].dt.dayofyear
-train1['weekday'] = train1['date'].dt.weekday
-# print(train1.head)
-
-# Read the holiday file
-
-holidays = pd.read_csv('usholidays.csv', header=None, names=['date', 'holiday'])
-
-# Format datetime again
-
-holidays['date'] = pd.to_datetime(holidays['date'], format='%Y/%m/%d')
-
-print(holidays.head(3))
-
-# Merge holidays into the data:
-
-# test
+# CLOSE ALL PLOTS!
+plt.close('all')
+# !!!!!
 
 
 
