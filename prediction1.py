@@ -171,14 +171,15 @@ train_1[start:end][['sales', 'forecast']].plot(figsize=(12, 8))
 
 # Lets make a function to show the error of the prediction:
 
-def errors(y_true, y_pred):
-    mape = np.mean(abs((y_true-y_pred)/y_true))*100
-    smape = np.mean((np.abs(y_pred - y_true) * 200/ (np.abs(y_pred) + np.abs(y_true))).fillna(0))
+def errors(true_values, predicted_values):
+    mape = np.mean(abs((true_values-predicted_values)/true_values))*100
+    smape = np.mean((np.abs(predicted_values - true_values) * 200/ (np.abs(predicted_values) + np.abs(true_values))).fillna(0))
     print('MAPE: %.2f %% \nSMAPE: %.2f' % (mape, smape), "%")
 
 errors(train_1[1730:1825]['sales'], train_1[1730:1825]['forecast'])
 
 # The prediction is not optimal. Lets add exogenous variables (Holidays of USA).
+# We'll continue with that in prediction2.py file.
 
 # CLOSE ALL PLOTS!
 plt.close('all')

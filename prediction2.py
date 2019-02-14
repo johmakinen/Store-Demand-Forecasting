@@ -42,7 +42,8 @@ print(holidays.head(3))
 
 # Merge holidays into the data:
 
-train1 = train1.merge(holidays,how="left", on="date")
+train1 = train1.merge(holidays, how="left", on="date")
+print(train1.head(4))
 
 
 
