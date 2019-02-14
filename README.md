@@ -9,6 +9,7 @@ prediction2.py - Second prediction with exogenous variables (SARIMAX-model)
 usholidays.csv - Holidays of USA for exogenous variables  
 train.csv - Training data  
 test.csv - Test data (Note: the Public/Private split is time based)  
+errors.py & test_stationarity.py are files for helper functions  
 
 
 # Data fields
