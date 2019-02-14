@@ -5,7 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
-
+from test_stationarity import test_stationarity
+from errors import errors
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -61,42 +62,6 @@ fig = add_decomp.plot()
 # From the additive decomposition we can clearly see the upward trend and the seasonal part. The timeseries is not
 # stationary.
 
-# Define a function to test stationarity with Dickey-Fuller test and plots.
-# The function is from https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/
-
-from statsmodels.tsa.stattools import adfuller
-
-
-def test_stationarity(timeseries, window=12, cutoff=0.01):
-
-    # Determine rolling statistics
-
-    rolmean = timeseries.rolling(window).mean()
-    rolstd = timeseries.rolling(window).std()
-
-    # Plot rolling statistics:
-    fig = plt.figure(figsize=(12, 8))
-    orig = plt.plot(timeseries, color='blue', label='Original')
-    mean = plt.plot(rolmean, color='red', label='Rolling Mean')
-    std = plt.plot(rolstd, color='black', label='Rolling Std')
-    plt.legend(loc='best')
-    plt.title('Rolling Mean & Standard Deviation')
-    plt.show()
-
-    # Perform Dickey-Fuller test:
-    print('Results of Dickey-Fuller Test:')
-    dftest = adfuller(timeseries, autolag='AIC', maxlag=20)
-    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
-    for key, value in dftest[4].items():
-        dfoutput['Critical Value (%s)' % key] = value
-    pvalue = dftest[1]
-    if pvalue < cutoff:
-        print('p-value = %.4f. The series is likely stationary.' % pvalue)
-    else:
-        print('p-value = %.4f. The series is likely non-stationary.' % pvalue)
-
-    print(dfoutput)
-
 
 # test_stationarity(train_1['sales'])
 
@@ -106,7 +71,7 @@ def test_stationarity(timeseries, window=12, cutoff=0.01):
 Dtrain_1 = train_1.sales - train_1.sales.shift(1)  # Shift data
 Dtrain_1 = Dtrain_1.dropna(inplace=False)  # Drop NaN values
 
-# test_stationarity(Dtrain_1, window=12)  #Test the stationarity again
+test_stationarity(Dtrain_1, window=12)  #Test the stationarity again
 
 # Now the data plots look like a stationary timeseries. Also the p-value of D-F-test is extremely small thus
 # the timesseries is now stationary.
@@ -143,7 +108,7 @@ from scipy import stats
 from scipy.stats import normaltest
 
 residuals = model.resid
-# print(normaltest(residuals))
+print(normaltest(residuals))
 # Normaltest has a very low p-value so the residuals are not normally distributed.
 
 # Lets plot the residuals
@@ -168,13 +133,6 @@ end = 1826
 train_1['forecast'] = model.predict(start = start, end= end, dynamic=True)
 train_1[start:end][['sales', 'forecast']].plot(figsize=(12, 8))
 # plt.show()
-
-# Lets make a function to show the error of the prediction:
-
-def errors(true_values, predicted_values):
-    mape = np.mean(abs((true_values-predicted_values)/true_values))*100
-    smape = np.mean((np.abs(predicted_values - true_values) * 200/ (np.abs(predicted_values) + np.abs(true_values))).fillna(0))
-    print('MAPE: %.2f %% \nSMAPE: %.2f' % (mape, smape), "%")
 
 errors(train_1[1730:1825]['sales'], train_1[1730:1825]['forecast'])
 
