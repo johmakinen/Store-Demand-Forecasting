@@ -48,9 +48,16 @@ holidays['date'] = pd.to_datetime(holidays['date'], format='%Y/%m/%d')
 # Merge holidays into the data:
 
 train1 = train1.merge(holidays, how="left", on="date")
+
+# Make another column for checking if a day is a holiday.
+# 0 = not a holiday, 1 = holiday
+
+train1['isHoliday'] = pd.notnull(train1['holiday']).astype(int)
+
+
+train1 = pd.get_dummies(train1, prefix=['month','holiday','weekday'],columns=['month','holiday','weekday'])
+
 print(train1.head(4))
-
-
 
 
 
