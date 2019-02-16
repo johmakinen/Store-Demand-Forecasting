@@ -104,4 +104,4 @@ plt.show()
 errors(train1[starti:endi]['sales'],train1[starti:endi]['forecast'])
 
 # Errors are still over 20% and the plot shows a great difference between the prediction and the real values.
-# We'll need to find a more suitable way to forecast the sales than SARIMAX-models.
+#  TODO: We'll need to find a more suitable way to forecast the sales than SARIMAX-models.
