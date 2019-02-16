@@ -81,17 +81,17 @@ test_stationarity(Dtrain_1, window=12)  #Test the stationarity again
 # The original data
 fig = plt.figure(figsize=(12, 8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(train_1.sales, lags=40, ax=ax1)
+fig = sm.graphics.tsa.plot_acf(train_1.sales, lags=30, ax=ax1)
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(train_1.sales, lags=40, ax=ax2)
+fig = sm.graphics.tsa.plot_pacf(train_1.sales, lags=30, ax=ax2)
 # plt.show()
 
 # The differenced data
 fig2 = plt.figure(figsize=(12, 8))
 ax1 = fig2.add_subplot(211)
-fig2 = sm.graphics.tsa.plot_acf(Dtrain_1, lags=40, ax=ax1)
+fig2 = sm.graphics.tsa.plot_acf(Dtrain_1, lags=30, ax=ax1)
 ax2 = fig2.add_subplot(212)
-fig2 = sm.graphics.tsa.plot_pacf(Dtrain_1, lags=40, ax=ax2)
+fig2 = sm.graphics.tsa.plot_pacf(Dtrain_1, lags=30, ax=ax2)
 # plt.show()
 
 # We can see that there's a weekly seasonality as the plots how spikes every 7th lag.
