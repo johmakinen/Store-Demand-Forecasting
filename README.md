@@ -3,7 +3,7 @@ The objective is to predict 3 months of item-level sales data at different store
 We'll be focusing on one store and one item at first to find a suitable way of forecasting the demand.  
 Data is from Kaggle "Store Item Demand Forecasting" -competition. https://www.kaggle.com/ 
 
-Prediction 2 SMAPE is about 20% which is large. Need to find out a more suitable forecasting method than SARIMAX.  
+Prediction 2 SMAPE is about 20% which is quite large. Need to find out a more suitable forecasting method than SARIMAX.  
 
 # File descriptions
 prediction1.py - First prediction without exogenous variables  (SARIMA-model)  
