@@ -16,7 +16,7 @@ errors.py & test_stationarity.py are files for helper functions
 
 # Data fields
 
-date - Date of the sale data. There are no holiday effects or store closures.  
+date - Date of the sale data.
 store - Store ID  
 item - Item ID  
 sales - Number of items sold at a particular store on a particular date.  
